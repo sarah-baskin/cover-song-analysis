@@ -4,3 +4,4 @@ MillionSongs_Spotify_LastFM/
 *.pyc
 __pycache__/
 .ipynb_checkpoints/
+.env
