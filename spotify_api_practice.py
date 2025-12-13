@@ -62,21 +62,9 @@ def search_for_song(token, track, artist, year):
         return None
     return json_result
 
-def get_song_features(token, id):
-    url = f"https://api.spotify.com/v1/audio-features/{id}"
-    headers = get_auth_header(token)
-    result = get(url, headers=headers)
-    json_result = json.loads(result.content)
-    if len(json_result) == 0:
-        print("Audio features for this song are not available.")
-        return None
-    return json_result
-
 
 token = get_token()
 result = search_for_song(token, "Mr. Brightside", "The Killers", 2004)
-id = result['tracks']['items'][0]['id']
-result = get_song_features(token, id)
 print(result)
 
 

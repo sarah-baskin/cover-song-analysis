@@ -2,6 +2,11 @@ DEAM_Dataset/
 MillionSongs_Spotify_LastFM/
 .DS_Store
 Metadata/
+Beats/
+CENS/
+HPCPs/
+MFCCs/
+CREMA/
 *.pyc
 __pycache__/
 .ipynb_checkpoints/
