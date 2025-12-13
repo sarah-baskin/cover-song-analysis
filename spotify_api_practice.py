@@ -4,6 +4,7 @@ import base64
 from requests import post
 from requests import get
 import json
+import urllib
 
 load_dotenv()
 
@@ -49,12 +50,33 @@ def get_songs_by_artist(token, artist_id):
     json_result = json.loads(result.content)["tracks"]
     return json_result
 
+def search_for_song(token, track, artist, year):
+    q = f"track:{track} artist:{artist} year:{year}"
+    q = urllib.parse.quote(q)
+    url = f"https://api.spotify.com/v1/search?q={q}&type=track&market=US&limit=1&offset=0"
+    headers = get_auth_header(token)
+    result = get(url, headers=headers)
+    json_result = json.loads(result.content)
+    if len(json_result) == 0:
+        print("This song is not in the Spotify database.")
+        return None
+    return json_result
+
+def get_song_features(token, id):
+    url = f"https://api.spotify.com/v1/audio-features/{id}"
+    headers = get_auth_header(token)
+    result = get(url, headers=headers)
+    json_result = json.loads(result.content)
+    if len(json_result) == 0:
+        print("Audio features for this song are not available.")
+        return None
+    return json_result
+
 
 token = get_token()
-result = search_for_artist(token, "ACDC")
-artist_id = result["id"]
-songs = get_songs_by_artist(token, artist_id)
+result = search_for_song(token, "Mr. Brightside", "The Killers", 2004)
+id = result['tracks']['items'][0]['id']
+result = get_song_features(token, id)
+print(result)
 
-for idx, song in enumerate(songs):
-    print(f"{idx + 1}. {song['name']}")
 
