@@ -13,3 +13,16 @@ deam_beat_regressor.pt
 __pycache__/
 .ipynb_checkpoints/
 .env
+best_performer.png
+bon_jovi.png
+difficult_audio.png
+fourth_best.png
+gender_example.png
+multi_language.png
+piano_to_brass_jazz.png
+second_best_performer.png
+third_best.png
+worst.png
+year_cover_release.png
+year_original_release.png
+years_since_original.png
